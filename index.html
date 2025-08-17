@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrackMaster 📊</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f5f5dc, #dbe6d1); /* cream + olive */
+      color: #2f3e2f;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #6b8e23; /* olive */
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 2em;
+      letter-spacing: 2px;
+    }
+
+    nav {
+      background-color: #8fbc8f; /* lighter olive */
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 30px;
+      margin: 20px;
+      background: #fffef5;
+      border-radius: 12px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #556b2f;
+      margin-bottom: 15px;
+    }
+
+    .timer {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 1.5em;
+      color: #556b2f;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #6b8e23;
+      color: white;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #556b2f;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #6b8e23;
+      padding: 12px;
+      text-align: center;
+      font-size: 1em;
+    }
+
+    th {
+      background-color: #dbe6d1;
+      color: #2f3e2f;
+    }
+
+    .facts {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f0f5e6;
+      border-left: 6px solid #6b8e23;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #6b8e23;
+      color: white;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    TrackMaster 📊  
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#timetable">Timetable</a>
+    <a href="#timer">Study Timer</a>
+    <a href="#motivation">Motivation</a>
+  </nav>
+
+  <section id="home">
+    <h2>Welcome to TrackMaster 📖</h2>
+    <p>Track your daily study goals, stay motivated, and achieve success with consistency. 🌟</p>
+  </section>
+
+  <section id="timetable">
+    <h2>📅 Your Study Timetable</h2>
+    <p>Plan your study hours wisely:</p>
+    <table>
+      <tr>
+        <th>Day</th>
+        <th>Subject</th>
+        <th>Time</th>
+      </tr>
+      <tr>
+        <td>Monday</td>
+        <td><input type="text" placeholder="Subject"></td>
+        <td><input type="time"></td>
+      </tr>
+      <tr>
+        <td>Tuesday</td>
+        <td><input type="text" placeholder="Subject"></td>
+        <td><input type="time"></td>
+      </tr>
+      <tr>
+        <td>Wednesday</td>
+        <td><input type="text" placeholder="Subject"></td>
+        <td><input type="time"></td>
+      </tr>
+      <tr>
+        <td>Thursday</td>
+        <td><input type="text" placeholder="Subject"></td>
+        <td><input type="time"></td>
+      </tr>
+      <tr>
+        <td>Friday</td>
+        <td><input type="text" placeholder="Subject"></td>
+        <td><input type="time"></td>
+      </tr>
+    </table>
+  </section>
+
+  <section id="timer">
+    <h2>⏱ Study Timer</h2>
+    <div class="timer" id="display">00:00:00</div>
+    <div style="text-align:center;">
+      <button onclick="startTimer()">Start</button>
+      <button onclick="pauseTimer()">Pause</button>
+      <button onclick="resetTimer()">Reset</button>
+    </div>
+  </section>
+
+  <section id="motivation">
+    <h2>💡 Stay Motivated</h2>
+    <div class="facts">📌 "Small progress each day adds up to big results."</div>
+    <div class="facts">📌 "Discipline is the bridge between goals and accomplishment."</div>
+    <div class="facts">📌 "Focus on progress, not perfection." ✨</div>
+  </section>
+
+  <footer>
+    © 2025 TrackMaster | Made by SriSingh
+  </footer>
+
+  <script>
+    let timer;
+    let seconds = 0, minutes = 0, hours = 0;
+    let running = false;
+
+    function startTimer() {
+      if (!running) {
+        running = true;
+        timer = setInterval(updateTime, 1000);
+      }
+    }
+
+    function pauseTimer() {
+      clearInterval(timer);
+      running = false;
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      running = false;
+      seconds = 0; minutes = 0; hours = 0;
+      document.getElementById("display").textContent = "00:00:00";
+    }
+
+    function updateTime() {
+      seconds++;
+      if (seconds == 60) { seconds = 0; minutes++; }
+      if (minutes == 60) { minutes = 0; hours++; }
+      document.getElementById("display").textContent =
+        (hours < 10 ? "0" + hours : hours) + ":" +
+        (minutes < 10 ? "0" + minutes : minutes) + ":" +
+        (seconds < 10 ? "0" + seconds : seconds);
+    }
+  </script>
+</body>
+</html>
